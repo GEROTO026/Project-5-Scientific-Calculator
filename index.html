@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+    <div class="calculator">
+        <!-- Botón para cambiar el tema -->
+        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+        <input type="text" id="display" disabled>
+        <div class="buttons">
+            <!-- Funciones científicas -->
+            <button onclick="appendOperation('Math.sin(')">sin</button>
+            <button onclick="appendOperation('Math.cos(')">cos</button>
+            <button onclick="appendOperation('Math.tan(')">tan</button>
+            <button onclick="appendOperation('Math.log(')">ln</button>
+            <button onclick="appendOperation('Math.sqrt(')">√</button>
+            <button onclick="appendOperation('Math.pow(')">x^y</button>
+            <button onclick="appendOperation('Math.PI')">π</button>
+            <button onclick="appendOperation('Math.E')">e</button>
+            <!-- Números y operaciones básicas -->
+            <button onclick="appendOperation('7')">7</button>
+            <button onclick="appendOperation('8')">8</button>
+            <button onclick="appendOperation('9')">9</button>
+            <button onclick="appendOperation('/')">/</button>
+            <button onclick="appendOperation('4')">4</button>
+            <button onclick="appendOperation('5')">5</button>
+            <button onclick="appendOperation('6')">6</button>
+            <button onclick="appendOperation('*')">*</button>
+            <button onclick="appendOperation('1')">1</button>
+            <button onclick="appendOperation('2')">2</button>
+            <button onclick="appendOperation('3')">3</button>
+            <button onclick="appendOperation('-')">-</button>
+            <button onclick="appendOperation('0')">0</button>
+            <button onclick="appendOperation('.')">.</button>
+            <button onclick="calculateResult()">=</button>
+            <button onclick="appendOperation('+')">+</button>
+            <!-- Funciones adicionales -->
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="deleteLast()">DEL</button>
+            <button onclick="appendOperation('(')">(</button>
+            <button onclick="appendOperation(')')">)</button>
+        </div>
+        <!-- Historial de operaciones -->
+        <div class="history">
+            <h3>historic</h3>
+            <ul id="history-list"></ul>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
