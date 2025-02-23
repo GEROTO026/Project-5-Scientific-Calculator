@@ -1,55 +1,227 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scientific Calculator</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Calculadora Científica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            transition: background-color 0.3s;
+        }
+
+        .calculator {
+            border-radius: 10px;
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .display {
+            width: 100%;
+            padding: 15px;
+            font-size: 24px;
+            text-align: right;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .history {
+            margin-top: 20px;
+            max-height: 150px;
+            overflow-y: auto;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        /* Tema claro (default) */
+        body.light {
+            background-color: #f0f0f0;
+        }
+
+        .light .calculator {
+            background-color: white;
+        }
+
+        .light .display {
+            background-color: #f8f8f8;
+        }
+
+        .light button {
+            background-color: #e0e0e0;
+        }
+
+        .light .history {
+            background-color: #f8f8f8;
+        }
+
+        /* Tema oscuro */
+        body.dark {
+            background-color: #1a1a1a;
+        }
+
+        .dark .calculator {
+            background-color: #2d2d2d;
+        }
+
+        .dark .display {
+            background-color: #3d3d3d;
+            color: white;
+        }
+
+        .dark button {
+            background-color: #4a4a4a;
+            color: white;
+        }
+
+        .dark .history {
+            background-color: #3d3d3d;
+            color: white;
+        }
+
+        @media (max-width: 480px) {
+            .calculator {
+                padding: 10px;
+            }
+
+            button {
+                padding: 12px;
+                font-size: 16px;
+            }
+        }
+    </style>
 </head>
-<body class="dark-theme">
+<body class="light">
     <div class="calculator">
-        <!-- Botón para cambiar el tema -->
-        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-        <input type="text" id="display" disabled>
+        <input type="text" class="display" readonly>
         <div class="buttons">
-            <!-- Funciones científicas -->
-            <button onclick="appendOperation('Math.sin(')">sin</button>
-            <button onclick="appendOperation('Math.cos(')">cos</button>
-            <button onclick="appendOperation('Math.tan(')">tan</button>
-            <button onclick="appendOperation('Math.log(')">ln</button>
-            <button onclick="appendOperation('Math.sqrt(')">√</button>
-            <button onclick="appendOperation('Math.pow(')">x^y</button>
-            <button onclick="appendOperation('Math.PI')">π</button>
-            <button onclick="appendOperation('Math.E')">e</button>
-            <!-- Números y operaciones básicas -->
-            <button onclick="appendOperation('7')">7</button>
-            <button onclick="appendOperation('8')">8</button>
-            <button onclick="appendOperation('9')">9</button>
-            <button onclick="appendOperation('/')">/</button>
-            <button onclick="appendOperation('4')">4</button>
-            <button onclick="appendOperation('5')">5</button>
-            <button onclick="appendOperation('6')">6</button>
-            <button onclick="appendOperation('*')">*</button>
-            <button onclick="appendOperation('1')">1</button>
-            <button onclick="appendOperation('2')">2</button>
-            <button onclick="appendOperation('3')">3</button>
-            <button onclick="appendOperation('-')">-</button>
-            <button onclick="appendOperation('0')">0</button>
-            <button onclick="appendOperation('.')">.</button>
-            <button onclick="calculateResult()">=</button>
-            <button onclick="appendOperation('+')">+</button>
-            <!-- Funciones adicionales -->
+            <button onclick="toggleTheme()">🌙</button>
             <button onclick="clearDisplay()">C</button>
-            <button onclick="deleteLast()">DEL</button>
-            <button onclick="appendOperation('(')">(</button>
-            <button onclick="appendOperation(')')">)</button>
+            <button onclick="deleteLast()">⌫</button>
+            <button onclick="appendToDisplay('(')">(</button> <!-- Agregado paréntesis de apertura -->
+            
+            <button onclick="appendToDisplay('sin(')">sin</button>
+            <button onclick="appendToDisplay('cos(')">cos</button>
+            <button onclick="appendToDisplay('tan(')">tan</button>
+            <button onclick="appendToDisplay('/')">/</button>
+            
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button onclick="appendToDisplay('*')">×</button>
+            
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button onclick="appendToDisplay('-')">-</button>
+            
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button onclick="appendToDisplay('+')">+</button>
+            
+            <button onclick="appendToDisplay('0')">0</button>
+            <button onclick="appendToDisplay('.')">.</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="appendToDisplay('^')">^</button>
+            
+            <button onclick="appendToDisplay('√(')">√</button>
+            <button onclick="appendToDisplay('∛(')">∛</button>
+            <button onclick="appendToDisplay(')')">)</button> <!-- Paréntesis de cierre recolocado -->
         </div>
-        <!-- Historial de operaciones -->
-        <div class="history">
-            <h3>historic</h3>
-            <ul id="history-list"></ul>
-        </div>
+        <div class="history"></div>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        const display = document.querySelector('.display');
+        const history = document.querySelector('.history');
+        let currentTheme = 'light';
+
+        function appendToDisplay(value) {
+            display.value += value;
+        }
+
+        function clearDisplay() {
+            display.value = '';
+        }
+
+        function deleteLast() {
+            display.value = display.value.slice(0, -1);
+        }
+
+        function calculate() {
+            try {
+                let expression = display.value
+                    .replace('sin(', 'Math.sin(')
+                    .replace('cos(', 'Math.cos(')
+                    .replace('tan(', 'Math.tan(')
+                    .replace('√(', 'Math.sqrt(')
+                    .replace('∛(', 'Math.cbrt(')
+                    .replace('^', '**');
+                
+                const result = eval(expression);
+                display.value = result;
+                addToHistory(`${expression} = ${result}`);
+            } catch (error) {
+                display.value = 'Error';
+                setTimeout(clearDisplay, 1000);
+            }
+        }
+
+        function addToHistory(entry) {
+            const p = document.createElement('p');
+            p.textContent = entry;
+            history.insertBefore(p, history.firstChild);
+        }
+
+        function toggleTheme() {
+            if (currentTheme === 'light') {
+                document.body.classList.remove('light');
+                document.body.classList.add('dark');
+                currentTheme = 'dark';
+            } else {
+                document.body.classList.remove('dark');
+                document.body.classList.add('light');
+                currentTheme = 'light';
+            }
+        }
+
+        display.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                calculate();
+            }
+        });
+    </script>
 </body>
 </html>
