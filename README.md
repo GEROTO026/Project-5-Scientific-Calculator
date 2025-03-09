@@ -1,19 +1,18 @@
 # Scientific Calculator
 **[URL](#):** [https://scientific-calculator-project5.netlify.app/](https://scientific-calculator-project5.netlify.app/)
 
-## Descripción
-Scientific Calculator es una calculadora web avanzada que ofrece funciones matemáticas más allá de las operaciones básicas. Perfecta para estudiantes o profesionales que necesitan realizar cálculos complejos desde el navegador.
+## Description
+Scientific Calculator is an advanced web calculator that offers mathematical functions beyond basic operations. Perfect for students or professionals needing to perform complex calculations directly in the browser.
 
-## Características
-- Operaciones básicas (suma, resta, multiplicación, división).
-- Funciones científicas (seno, coseno, logaritmos, etc.).
-- Interfaz clara con botones bien organizados.
+## Features
+- Basic operations (addition, subtraction, multiplication, division).
+- Scientific functions (sine, cosine, logarithms, etc.).
+- Clear interface with well-organized buttons.
 
-## Tecnologías utilizadas (estimadas)
+## Technologies Used
 - **Frontend:** HTML, CSS, JavaScript.
-- **Lógica:** JavaScript puro para cálculos.
-- **Despliegue:** Netlify.
+- **Deployment:** Netlify.
 
-## Instalación y uso
-1. Accede al enlace: [https://scientific-calculator-project5.netlify.app/](https://scientific-calculator-project5.netlify.app/).
-2. Usa los botones para realizar tus cálculos.
+## Installation and Usage
+1. Access the link: [https://scientific-calculator-project5.netlify.app/](https://scientific-calculator-project5.netlify.app/).
+2. Use the buttons to perform your calculations.
